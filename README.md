@@ -184,6 +184,3 @@ npm run export
 
 4. Upload the contents of `out/` to your Hostinger `public_html/` directory or your subdomain folder (like `bitcoin.example.com`).
 
----
-
-> Built with ⚡ by [@YOUR_HANDLE](https://github.com/YOUR_USERNAME)
