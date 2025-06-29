@@ -1,37 +1,189 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🟠 Bitcoin URI + QR Code Generator
 
-## Getting Started
+A modern, clean **Next.js 14 + TypeScript + Tailwind + shadcn/ui** web app that lets users:
 
-First, run the development server:
+- Enter a **Bitcoin wallet address, amount, and optional message** (e.g., invoice #)
+- Instantly generate a valid **BIP-21 URI**
+- Display the URI as text **and a QR code**
+- Copy the URI to clipboard for sharing
+- ⚡ Works with all major BTC wallets (Edge, Muun, BlueWallet, etc.)
+
+---
+
+## ✨ Features
+
+- ✅ BIP-21 URI generation (`bitcoin:...`)
+- ✅ QR code generation via `qrcode`
+- ✅ Input validation
+- ✅ Tailwind + shadcn UI components
+- 🧠 Clean, scalable layout for future automations
+- 📦 Fully typed with TypeScript
+
+---
+
+## 📦 Tech Stack
+
+| Tech         | Description                         |
+|--------------|-------------------------------------|
+| Next.js 14   | React framework (App Router)        |
+| TypeScript   | Static typing                       |
+| TailwindCSS  | Utility-first styling               |
+| shadcn/ui    | Accessible UI components            |
+| qrcode       | QR Code rendering                   |
+
+---
+
+## 🚀 Getting Started
+
+### 1. Clone the Repo
+
+```bash
+git clone https://github.com/YOUR_USERNAME/bitcoin-uri-gen.git
+cd bitcoin-uri-gen
+```
+
+> 🔐 If your repo is private, use GitHub SSH or authenticate with `gh`.
+
+---
+
+### 2. Install Node.js (if not already)
+
+```bash
+node -v
+```
+
+If missing, install via:
+
+```bash
+brew install node
+```
+
+Or use [Volta](https://volta.sh) or [nvm](https://github.com/nvm-sh/nvm) to manage versions.
+
+---
+
+### 3. Install Dependencies
+
+```bash
+npm install
+```
+
+---
+
+### 4. Start the Dev Server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then open [http://localhost:3000](http://localhost:3000) 🎉
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## ⚠️ Common Issues
 
-## Learn More
+> ❗ **Seeing import errors like `@/components/ui/input` not found?**
 
-To learn more about Next.js, take a look at the following resources:
+You probably haven’t generated the UI components with `shadcn-ui`. Just run:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npx shadcn-ui@latest add button input card label
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Then restart your dev server.
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🧱 Project Structure
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-# btc_uri_gen
+```
+src/
+├─ app/
+│  └─ page.tsx         # main invoice/QR UI
+├─ components/
+│  └─ ui/              # shadcn components (input, button, card, etc.)
+public/
+tailwind.config.ts
+tsconfig.json
+```
+
+---
+
+## 📌 Next Steps (TODO)
+
+- [ ] 🔄 Pull BTC amounts dynamically from a cart/order system
+- [ ] 🧾 Auto-fill `message` field with invoice numbers
+- [ ] 🧠 Generate fresh BTC addresses via xpub or backend call
+- [ ] 📩 Email the URI and QR to a customer (with invoice PDF)
+- [ ] 🧪 Confirm tx using mempool.space or own node
+- [ ] 🌐 Deploy to Vercel or Hostinger
+
+---
+
+<details>
+<summary>📚 Developer Tips</summary>
+
+- Use `nvm` or `volta` to pin a Node version per project:
+  ```bash
+  echo "20.11.1" > .nvmrc
+  nvm use
+  ```
+
+- Restart your TypeScript server in VS Code if imports break:
+  `Cmd+Shift+P` → “TypeScript: Restart TS Server”
+
+</details>
+
+---
+
+## ✅ Contributing
+
+Pull requests welcome! If you're using this in your stack or expanding it, feel free to fork and build on it.
+
+---
+
+## 📝 License
+
+MIT — free to use, modify, and commercialize. Attribution welcome but not required.
+
+---
+
+## 🔗 Related
+
+- [BIP-21: URI Format](https://github.com/bitcoin/bips/blob/master/bip-0021.mediawiki)
+- [qrcode NPM Package](https://www.npmjs.com/package/qrcode)
+- [shadcn/ui Docs](https://ui.shadcn.com/)
+
+---
+
+## 🧱 Build & Deploy (Static Export)
+
+### ➤ If deploying to **Hostinger** or any shared host (non-Node):
+
+You’ll need to build a static version of the site:
+
+1. Edit your `next.config.js` file (create it if missing):
+
+```js
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  output: 'export',
+};
+
+module.exports = nextConfig;
+```
+
+2. Build & export your site:
+
+```bash
+npm run build
+npm run export
+```
+
+3. This creates an `out/` folder with static HTML, CSS, and JS — ready for upload.
+
+4. Upload the contents of `out/` to your Hostinger `public_html/` directory or your subdomain folder (like `bitcoin.example.com`).
+
+---
+
+> Built with ⚡ by [@YOUR_HANDLE](https://github.com/YOUR_USERNAME)
